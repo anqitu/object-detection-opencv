@@ -132,7 +132,7 @@ def get_classes():
 def get_detected_image_paths(csv_path):
     if not os.path.exists(csv_path):
         with open(csv_path, mode='w') as csv_file:
-            fieldnames = ['image_path', 'people_count']
+            fieldnames = ['Image', 'People Count']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             csv_file.close()
@@ -142,9 +142,9 @@ def get_detected_image_paths(csv_path):
 
 def write_to_csv(image_path, people_count):
     with open(csv_path, mode='a') as csv_file:
-        fieldnames = ['image_path', 'people_count']
+        fieldnames = ['Image', 'People Count']
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writerow({'image_path': image_path, 'people_count': people_count})
+        writer.writerow({'Image': image_path, 'People Count': people_count})
         csv_file.close()
 
 
@@ -156,6 +156,7 @@ scale = 0.00392
 net = cv2.dnn.readNet(weights, config)
 
 detected_image_paths = get_detected_image_paths(csv_path)
+image_paths = set(image_paths).difference(set(detected_image_paths))
 
 for image_path in image_paths:
     (image, people_count_total) = detect_complete_image(cv2.imread(image_path))
