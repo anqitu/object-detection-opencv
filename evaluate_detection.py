@@ -28,9 +28,9 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 mean_squared_error(combine_df['People Count (Detect)'], combine_df['People Count (Tag)'])
 mean_absolute_error(combine_df['People Count (Detect)'], combine_df['People Count (Tag)'])
 
-combine_df['Diff'].value_counts().iplot(kind='bar')
-combine_df[combine_df['People Count (Tag)']==0]['Diff'].value_counts().iplot(kind='bar')
-combine_df[combine_df['People Count (Tag)']!=0]['Diff'].value_counts().iplot(kind='bar')
+combine_df['Diff'].value_counts().iplot(kind='bar', title = 'Detect vs Tag Diff (All)')
+combine_df[combine_df['People Count (Tag)']==0]['Diff'].value_counts().iplot(kind='bar', title = 'Detect vs Tag Diff (Tag = 0)')
+combine_df[combine_df['People Count (Tag)']!=0]['Diff'].value_counts().iplot(kind='bar', title = 'Detect vs Tag Diff (Tag != 0)')
 
 index = -1
 image = cv2.imread(combine_df.iloc[index]['Image'])
